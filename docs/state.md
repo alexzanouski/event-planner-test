@@ -37,8 +37,13 @@ it was written, so it must be regenerated.
 ### gates
 
 ```json
-"G1": { "status": "fail", "owner": "budget-aggregator", "retries": 1 }
+"G3": { "status": "fail", "owner": "catering-planner", "retries": 1 }
 ```
+
+`owner` comes from the validator's finding. G1, G6 and G7 have no fixed
+owner: a budget overrun is fixed by whoever owns the expensive line, a
+duplicate by the artifact that repeats the vendor, a broken link by the
+artifact that cites it.
 
 `status` is `pending`, `pass` or `fail`. `retries` counts re-runs caused
 by this gate. At 3 the run stops and the failure is reported.

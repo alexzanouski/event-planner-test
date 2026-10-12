@@ -83,7 +83,19 @@ The `artifact-validator` skill checks these before the next group starts.
   the total as one line.
 - `requirements.md` has `Request`, `Confirmed requirements`, `Constraints`,
   `Assumptions` and `Q&A`. It is the only artifact the user confirms.
-- `validation.md` has one section per gate (G1..G7) with `PASS` or `FAIL`,
-  findings and the name of the owning agent for each failure.
+- `validation.md` starts with `Overall: PASS|FAIL`, then has one section
+  per gate in this form:
+
+  ```
+  ## G3 Dietary restrictions are covered
+  Result: PASS | FAIL
+  Findings: <what was checked and what is wrong, or "none">
+  Owner: <agent that has to fix it, or "-" on PASS>
+  ```
+
+  A finding with several causes lists one `Owner` per cause. The
+  coordinator re-runs exactly these agents. A gate that does not apply
+  (for example G5 for an indoor event) is `PASS` with the reason in
+  Findings.
 - `event-plan.md` is the merged timeline: `Overview`, `Timeline`,
   `Budget`, `Checklist`, `Sources`.

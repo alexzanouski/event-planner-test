@@ -74,6 +74,10 @@ each group reads the artifacts of the previous ones.
 - G6 No duplicate vendors or venues.
 - G7 Every recommendation links to a real source page.
 
+The `validator` agent runs all gates and names the owning agent for every
+failure. For G1, G6 and G7 the owner depends on the finding, for example
+the artifact with the largest cost line.
+
 ## State and runs
 
 Each run lives in `runs/<run-id>/`:

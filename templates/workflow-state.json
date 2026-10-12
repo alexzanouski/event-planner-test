@@ -16,12 +16,12 @@
     "html-builder": { "group": "H", "status": "pending", "artifact": "event-plan.html", "attempts": 0, "depends_on": ["plan-builder"] }
   },
   "gates": {
-    "G1": { "status": "pending", "owner": "budget-aggregator", "retries": 0 },
+    "G1": { "status": "pending", "owner": null, "retries": 0 },
     "G2": { "status": "pending", "owner": "venue-planner", "retries": 0 },
     "G3": { "status": "pending", "owner": "catering-planner", "retries": 0 },
     "G4": { "status": "pending", "owner": "program-planner", "retries": 0 },
     "G5": { "status": "pending", "owner": "program-planner", "retries": 0 },
-    "G6": { "status": "pending", "owner": "services-planner", "retries": 0 },
+    "G6": { "status": "pending", "owner": null, "retries": 0 },
     "G7": { "status": "pending", "owner": null, "retries": 0 }
   },
   "approval": { "status": "none", "plan_hash": null, "approved_at": null, "feedback": null }

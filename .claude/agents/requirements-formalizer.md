@@ -34,6 +34,7 @@ Required fields:
 | Time window | `16:00-22:00` |
 | Budget limit and currency | 2000 EUR |
 | Indoor / outdoor | outdoor, indoor, either |
+| Indoor fallback | accepted, not accepted (asked only when outdoor or either) |
 | Dietary restrictions | vegetarian x3, no nuts, none |
 
 Optional fields: venue preferences (accessibility, parking), music or

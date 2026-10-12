@@ -33,7 +33,7 @@ each group reads the artifacts of the previous ones.
 |---|---|---|
 | requirements-formalizer | `requirements.md` | user request, Q&A |
 | venue-planner | `venue.md` | requirements |
-| weather | `weather.md` | requirements, venue |
+| weather | `weather.md` | requirements |
 | catering-planner | `catering.md` | requirements, venue, weather |
 | program-planner | `program.md` | requirements, venue, weather |
 | services-planner | `services.md` | requirements, venue, weather |

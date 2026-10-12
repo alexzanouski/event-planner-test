@@ -58,7 +58,8 @@ The `artifact-validator` skill checks these before the next group starts.
 
 | Artifact | Header | Required sections, in order |
 |---|---|---|
-| venue, weather, catering, program, services, checklist, budget | yes | Summary, Details, Costs, Sources, Open issues |
+| venue, weather, catering, services, checklist, budget | yes | Summary, Details, Costs, Sources, Open issues |
+| program | yes | Summary, Details, Rain fallback, Costs, Sources, Open issues |
 | requirements | yes | Request, Confirmed requirements, Constraints, Assumptions, Q&A |
 | validation | yes | one section per gate G1..G7 |
 | event-plan | yes | Overview, Timeline, Budget, Checklist, Sources |
@@ -66,6 +67,10 @@ The `artifact-validator` skill checks these before the next group starts.
 `Header` means the `Owner`, `Run`, `Status` lines under the title.
 
 ## Special artifacts
+
+- `program.md` has an extra `Rain fallback` section after Details. It says
+  where and how the program continues if the weather is bad, or
+  `Not needed, indoor event` for an indoor venue. Gate G5 checks it.
 
 - `requirements.md` has `Request`, `Confirmed requirements`, `Constraints`,
   `Assumptions` and `Q&A`. It is the only artifact the user confirms.

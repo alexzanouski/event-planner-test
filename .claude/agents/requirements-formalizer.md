@@ -36,9 +36,10 @@ Required fields:
 | Indoor / outdoor | outdoor, indoor, either |
 | Indoor fallback | accepted, not accepted (asked only when outdoor or either) |
 | Dietary restrictions | vegetarian x3, no nuts, none |
+| Services needed | photographer, decor, sound, none |
 
 Optional fields: venue preferences (accessibility, parking), music or
-program wishes, services needed (photo, decor, sound), style or theme.
+program wishes, style or theme.
 
 ## Output file
 

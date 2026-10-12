@@ -1,0 +1,28 @@
+{
+  "run_id": "",
+  "created_at": "",
+  "updated_at": "",
+  "stages": {
+    "requirements-formalizer": { "group": "0", "status": "pending", "artifact": "requirements.md", "attempts": 0, "depends_on": [] },
+    "venue-planner": { "group": "A", "status": "pending", "artifact": "venue.md", "attempts": 0, "depends_on": ["requirements-formalizer"] },
+    "weather": { "group": "A", "status": "pending", "artifact": "weather.md", "attempts": 0, "depends_on": ["requirements-formalizer"] },
+    "catering-planner": { "group": "B", "status": "pending", "artifact": "catering.md", "attempts": 0, "depends_on": ["venue-planner", "weather"] },
+    "program-planner": { "group": "B", "status": "pending", "artifact": "program.md", "attempts": 0, "depends_on": ["venue-planner", "weather"] },
+    "services-planner": { "group": "B", "status": "pending", "artifact": "services.md", "attempts": 0, "depends_on": ["venue-planner", "weather"] },
+    "guest-checklist-planner": { "group": "C", "status": "pending", "artifact": "checklist.md", "attempts": 0, "depends_on": ["venue-planner", "weather", "program-planner"] },
+    "budget-aggregator": { "group": "C", "status": "pending", "artifact": "budget.md", "attempts": 0, "depends_on": ["venue-planner", "catering-planner", "program-planner", "services-planner"] },
+    "validator": { "group": "V", "status": "pending", "artifact": "validation.md", "attempts": 0, "depends_on": ["guest-checklist-planner", "budget-aggregator"] },
+    "plan-builder": { "group": "P", "status": "pending", "artifact": "event-plan.md", "attempts": 0, "depends_on": ["validator"] },
+    "html-builder": { "group": "H", "status": "pending", "artifact": "event-plan.html", "attempts": 0, "depends_on": ["plan-builder"] }
+  },
+  "gates": {
+    "G1": { "status": "pending", "owner": "budget-aggregator", "retries": 0 },
+    "G2": { "status": "pending", "owner": "venue-planner", "retries": 0 },
+    "G3": { "status": "pending", "owner": "catering-planner", "retries": 0 },
+    "G4": { "status": "pending", "owner": "program-planner", "retries": 0 },
+    "G5": { "status": "pending", "owner": "program-planner", "retries": 0 },
+    "G6": { "status": "pending", "owner": "services-planner", "retries": 0 },
+    "G7": { "status": "pending", "owner": null, "retries": 0 }
+  },
+  "approval": { "status": "none", "plan_hash": null, "approved_at": null, "feedback": null }
+}

@@ -85,4 +85,4 @@ State is updated automatically whenever an artifact is written. On resume
 the coordinator reads the state, skips completed stages and continues
 with the first stage that is pending or failed.
 
-Artifact and state formats are described in `docs/` (added in a later commit).
+Artifact layout is described in `docs/artifacts.md`, state format in `docs/state.md`.

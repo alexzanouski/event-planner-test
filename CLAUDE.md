@@ -47,8 +47,8 @@ each group reads the artifacts of the previous ones.
 
 1. Do not start planning until `requirements.md` is confirmed by the user.
    Ask all missing questions in one batch, not one by one.
-2. Every artifact is checked with the `artifact-validator` skill before the
-   next group starts. A failed artifact is re-run, not skipped.
+2. Every artifact is checked with the `artifact-validator` skill
+   (`.claude/skills/artifact-validator/`) before the next group starts. A failed artifact is re-run, not skipped.
 3. The `validator` agent checks the quality gates below. On a failure the
    coordinator finds the owning agent, re-runs only that agent and the
    artifacts that depend on it, then validates again. Max 3 retries per

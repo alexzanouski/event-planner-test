@@ -34,7 +34,7 @@ Two or three sentences with the main recommendation.
 The actual content. Tables for options, lists for steps.
 
 ## Costs
-Table with item, quantity, unit price, total, currency.
+Table with item, quantity, unit price, total. Amounts carry the currency code (`400 EUR`).
 Write "No costs" if the artifact has none.
 
 ## Sources
@@ -51,6 +51,19 @@ Rules:
   matching entry in Sources.
 - Dates are ISO (`2026-08-01`), times are 24h (`18:30`).
 - No placeholders such as `TBD` or `lorem ipsum` in a final artifact.
+
+## Required sections
+
+The `artifact-validator` skill checks these before the next group starts.
+
+| Artifact | Header | Required sections, in order |
+|---|---|---|
+| venue, weather, catering, program, services, checklist, budget | yes | Summary, Details, Costs, Sources, Open issues |
+| requirements | yes | Request, Confirmed requirements, Constraints, Assumptions, Q&A |
+| validation | yes | one section per gate G1..G7 |
+| event-plan | yes | Overview, Timeline, Budget, Checklist, Sources |
+
+`Header` means the `Owner`, `Run`, `Status` lines under the title.
 
 ## Special artifacts
 

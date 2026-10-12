@@ -61,8 +61,15 @@ each group reads the artifacts of the previous ones.
    web search or fetch. Weather data comes from the Open-Meteo MCP server (`.mcp.json`;
    tools `geocoding` and `weather_forecast`).
    Do not rely on model memory for facts.
-6. Internal artifact names (`venue.md`, `workflow-state.json`, ...) must not
-   appear in text shown to the user.
+6. Internal names must not reach the user. A leak is any artifact file
+   name (`venue.md`, `budget.md`, ...), `workflow-state.json` or a
+   `runs/<run-id>/artifacts` path. Refer to artifacts in plain words
+   ("the venue shortlist"). `no-leak-guard` blocks `AskUserQuestion`
+   calls and writes of `event-plan.html` that contain such names.
+7. `approval-gate-guard` blocks writing `runs/<run-id>/event-plan.html`
+   unless the state says `approved` and the approved hash matches the
+   current plan. The coordinator cannot bypass it by editing the state
+   by hand, the hash is computed from the plan file.
 
 ## Quality gates
 

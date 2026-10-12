@@ -37,8 +37,8 @@ each group reads the artifacts of the previous ones.
 | catering-planner | `catering.md` | requirements, venue, weather |
 | program-planner | `program.md` | requirements, venue, weather |
 | services-planner | `services.md` | requirements, venue, weather |
-| guest-checklist-planner | `checklist.md` | requirements, venue, program, weather |
-| budget-aggregator | `budget.md` | all domain artifacts |
+| guest-checklist-planner | `checklist.md` | requirements, venue, weather, catering, program |
+| budget-aggregator | `budget.md` | requirements, venue, catering, program, services |
 | validator | `validation.md` | all artifacts |
 | plan-builder | `event-plan.md` | all validated artifacts |
 | html-builder | `event-plan.html` | approved `event-plan.md` |

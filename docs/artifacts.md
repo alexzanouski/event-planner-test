@@ -72,6 +72,15 @@ The `artifact-validator` skill checks these before the next group starts.
   where and how the program continues if the weather is bad, or
   `Not needed, indoor event` for an indoor venue. Gate G5 checks it.
 
+- `checklist.md` lists tasks and never has costs. Its Costs section says
+  `No costs`. Anything that costs money belongs to the owning planner, so
+  the budget does not have to wait for the checklist in group C.
+- `budget.md` keeps the standard sections. Its Details is a table with
+  artifact, item and total, one row per cost line taken from the other
+  artifacts, followed by `Total`, `Limit`, `Remainder` and
+  `Within limit: yes|no`.
+  All amounts are in the requirements currency. The Costs section repeats
+  the total as one line.
 - `requirements.md` has `Request`, `Confirmed requirements`, `Constraints`,
   `Assumptions` and `Q&A`. It is the only artifact the user confirms.
 - `validation.md` has one section per gate (G1..G7) with `PASS` or `FAIL`,

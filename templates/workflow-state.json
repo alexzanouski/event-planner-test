@@ -3,17 +3,17 @@
   "created_at": "",
   "updated_at": "",
   "stages": {
-    "requirements-formalizer": { "group": "0", "status": "pending", "artifact": "requirements.md", "attempts": 0, "depends_on": [] },
-    "venue-planner": { "group": "A", "status": "pending", "artifact": "venue.md", "attempts": 0, "depends_on": ["requirements-formalizer"] },
-    "weather": { "group": "A", "status": "pending", "artifact": "weather.md", "attempts": 0, "depends_on": ["requirements-formalizer"] },
-    "catering-planner": { "group": "B", "status": "pending", "artifact": "catering.md", "attempts": 0, "depends_on": ["venue-planner", "weather"] },
-    "program-planner": { "group": "B", "status": "pending", "artifact": "program.md", "attempts": 0, "depends_on": ["venue-planner", "weather"] },
-    "services-planner": { "group": "B", "status": "pending", "artifact": "services.md", "attempts": 0, "depends_on": ["venue-planner", "weather"] },
-    "guest-checklist-planner": { "group": "C", "status": "pending", "artifact": "checklist.md", "attempts": 0, "depends_on": ["venue-planner", "weather", "catering-planner", "program-planner"] },
-    "budget-aggregator": { "group": "C", "status": "pending", "artifact": "budget.md", "attempts": 0, "depends_on": ["venue-planner", "catering-planner", "program-planner", "services-planner"] },
-    "validator": { "group": "V", "status": "pending", "artifact": "validation.md", "attempts": 0, "depends_on": ["guest-checklist-planner", "budget-aggregator"] },
-    "plan-builder": { "group": "P", "status": "pending", "artifact": "event-plan.md", "attempts": 0, "depends_on": ["validator"] },
-    "html-builder": { "group": "H", "status": "pending", "artifact": "event-plan.html", "attempts": 0, "depends_on": ["plan-builder"] }
+    "requirements-formalizer": { "group": "0", "status": "pending", "artifact": "requirements.md", "attempts": 0, "hash": null, "depends_on": [] },
+    "venue-planner": { "group": "A", "status": "pending", "artifact": "venue.md", "attempts": 0, "hash": null, "depends_on": ["requirements-formalizer"] },
+    "weather": { "group": "A", "status": "pending", "artifact": "weather.md", "attempts": 0, "hash": null, "depends_on": ["requirements-formalizer"] },
+    "catering-planner": { "group": "B", "status": "pending", "artifact": "catering.md", "attempts": 0, "hash": null, "depends_on": ["venue-planner", "weather"] },
+    "program-planner": { "group": "B", "status": "pending", "artifact": "program.md", "attempts": 0, "hash": null, "depends_on": ["venue-planner", "weather"] },
+    "services-planner": { "group": "B", "status": "pending", "artifact": "services.md", "attempts": 0, "hash": null, "depends_on": ["venue-planner", "weather"] },
+    "guest-checklist-planner": { "group": "C", "status": "pending", "artifact": "checklist.md", "attempts": 0, "hash": null, "depends_on": ["venue-planner", "weather", "catering-planner", "program-planner"] },
+    "budget-aggregator": { "group": "C", "status": "pending", "artifact": "budget.md", "attempts": 0, "hash": null, "depends_on": ["venue-planner", "catering-planner", "program-planner", "services-planner"] },
+    "validator": { "group": "V", "status": "pending", "artifact": "validation.md", "attempts": 0, "hash": null, "depends_on": ["guest-checklist-planner", "budget-aggregator"] },
+    "plan-builder": { "group": "P", "status": "pending", "artifact": "event-plan.md", "attempts": 0, "hash": null, "depends_on": ["validator"] },
+    "html-builder": { "group": "H", "status": "pending", "artifact": "event-plan.html", "attempts": 0, "hash": null, "depends_on": ["plan-builder"] }
   },
   "gates": {
     "G1": { "status": "pending", "owner": null, "retries": 0 },

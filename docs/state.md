@@ -25,6 +25,7 @@ Keyed by agent name:
   "status": "done",
   "artifact": "venue.md",
   "attempts": 1,
+  "hash": "sha256 of the artifact file",
   "depends_on": ["requirements-formalizer"],
   "updated_at": "2026-10-12T10:15:00Z"
 }
@@ -33,6 +34,11 @@ Keyed by agent name:
 `status` is one of `pending`, `running`, `done`, `failed`, `stale`.
 `stale` means the artifact exists but an upstream artifact changed after
 it was written, so it must be regenerated.
+
+The post-write hook sets the stage to `done` when the written artifact has
+`Status: final` and to `running` otherwise. It stores the file `hash` and
+counts `attempts`. If the hash of an existing artifact changes, every
+`done` stage that depends on it, directly or not, becomes `stale`.
 
 ### gates
 

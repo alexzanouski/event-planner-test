@@ -33,7 +33,8 @@ On the first run Claude Code asks to approve the project MCP server.
 | `.claude/skills/` | Reusable skills |
 | `.claude/commands/` | Slash commands (coordinator) |
 | `.claude/hooks/` | PreToolUse / PostToolUse hook scripts |
-| `scripts/` | Helper scripts (state, approval) |
+| `.claude/settings.json` | Hook registration |
+| `scripts/` | `state.py` (init, show, update run state), approval script later |
 | `docs/` | Artifact and state conventions |
 | `templates/` | Artifact and HTML templates |
 | `runs/` | Persisted sample runs: inputs, artifacts, state |

@@ -30,7 +30,8 @@ coordinator also passes the findings to fix.
 - `Dietary coverage:` table with one row per restriction from the
   requirements, showing which dishes cover it and for how many guests.
   Every restriction must have at least one covered dish.
-- `Serving plan:` when food and drinks are served.
+- `Serving plan:` when food and drinks are served, one `HH:MM-HH:MM`
+  range per service, so the plan-builder can put it in the timeline.
 
 Costs: price per person and total for the guest count, in the requirements
 currency. Every caterer and price needs an entry in Sources.

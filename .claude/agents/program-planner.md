@@ -26,8 +26,10 @@ coordinator also passes the findings to fix.
 
 ## Content of Details
 
-- Table of time slots: time, activity, place, duration, notes. Slots must
-  not overlap and must stay inside the time window.
+- Table of time slots: time, activity, place, duration, notes. The time
+  is always `HH:MM-HH:MM` (24h), one range per row, for example
+  `17:00-18:30`. Slots must not overlap and must stay inside the time
+  window. The plan-builder merges these rows into the timeline.
 - `Entertainment providers:` name, what they do, link. Skip if none.
 
 ## Rain fallback

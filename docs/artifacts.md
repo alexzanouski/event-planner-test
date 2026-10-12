@@ -97,5 +97,16 @@ The `artifact-validator` skill checks these before the next group starts.
   coordinator re-runs exactly these agents. A gate that does not apply
   (for example G5 for an indoor event) is `PASS` with the reason in
   Findings.
-- `event-plan.md` is the merged timeline: `Overview`, `Timeline`,
-  `Budget`, `Checklist`, `Sources`.
+- `event-plan.md` is the merged plan. The section names are fixed, the
+  HTML template depends on them:
+  - `Overview`: event type, date, city, guests, time window, venue,
+    caterer, weather in one line, total cost and limit.
+  - `Timeline`: one table with `Time` (`HH:MM-HH:MM`), `What`, `Where`,
+    `Notes`, sorted by start time. Rows come from the program slots, the
+    catering serving plan and the services times. Last row group is
+    `Rain fallback` if the event is not indoor.
+  - `Budget`: the breakdown, total, limit and remainder from `budget.md`.
+  - `Checklist`: organiser tasks and the guest message from `checklist.md`.
+  - `Sources`: all sources of all artifacts, without duplicates, grouped
+    by artifact topic.
+  It contains no content that is not in a validated artifact.

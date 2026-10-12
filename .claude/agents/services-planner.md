@@ -29,7 +29,8 @@ services were requested and the other sections say `None` or
 
 ## Content of Details
 
-Table: service, vendor, what is included, duration, price, source. Do not
+Table: service, vendor, what is included, time (`HH:MM-HH:MM`), price,
+source. Do not
 use the same vendor as `venue.md` or `catering.md`.
 
 ## Reply to the coordinator

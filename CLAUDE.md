@@ -58,7 +58,8 @@ each group reads the artifacts of the previous ones.
    model's own judgement. If the user rejects, the feedback goes to the
    affected agents and the plan is approved again.
 5. Every claim about venues, prices or vendors needs a source URL found via
-   web search or fetch. Weather data comes from the Open-Meteo MCP server.
+   web search or fetch. Weather data comes from the Open-Meteo MCP server (`.mcp.json`;
+   tools `geocoding` and `weather_forecast`).
    Do not rely on model memory for facts.
 6. Internal artifact names (`venue.md`, `workflow-state.json`, ...) must not
    appear in text shown to the user.

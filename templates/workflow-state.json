@@ -2,6 +2,7 @@
   "run_id": "",
   "created_at": "",
   "updated_at": "",
+  "requirements_confirmed": false,
   "stages": {
     "requirements-formalizer": { "group": "0", "status": "pending", "artifact": "requirements.md", "attempts": 0, "hash": null, "depends_on": [] },
     "venue-planner": { "group": "A", "status": "pending", "artifact": "venue.md", "attempts": 0, "hash": null, "depends_on": ["requirements-formalizer"] },

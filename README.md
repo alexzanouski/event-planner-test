@@ -5,15 +5,12 @@ into a validated, human-approved event plan delivered as a standalone HTML page.
 
 Invoked with a custom slash command: `/plan-event <request>`.
 
-> Status: work in progress. Setup, run and resume instructions are added
-> as the workflow components land.
-
 ## Prerequisites
 
 - [Claude Code](https://docs.claude.com/en/docs/claude-code) with a logged-in
   account or `ANTHROPIC_API_KEY`
 - Node.js 22 or later (the Open-Meteo MCP server runs through `npx`)
-- Python 3 (helper scripts, added in later commits)
+- Python 3 (state script and hooks, standard library only)
 
 ## MCP servers
 
@@ -24,6 +21,25 @@ Invoked with a custom slash command: `/plan-event <request>`.
 | [open-meteo](https://github.com/cmer81/open-meteo-mcp) | `weather` agent | No API key. Pinned to `2.5.2` |
 
 On the first run Claude Code asks to approve the project MCP server.
+
+## Run
+
+Start Claude Code in the repository root and approve the project MCP
+server and hooks on first start:
+
+```bash
+claude
+```
+
+Then:
+
+```
+/plan-event Birthday party for 20 guests in Warsaw on 2026-10-25, 16:00-22:00, budget 2000 EUR, 3 vegetarians, photographer needed
+```
+
+The command asks the missing questions in one batch, confirms the
+requirements, runs the agents and creates `runs/<run-id>/`. Resume and
+approval are described below once they land.
 
 ## Repository layout
 

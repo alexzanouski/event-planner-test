@@ -9,8 +9,9 @@ finished work.
 
 | Field | Meaning |
 |---|---|
-| `run_id` | Folder name of the run |
+| `run_id` | Folder name of the run, `<date>-<slug>`, for example `2026-10-25-birthday-warsaw` |
 | `created_at`, `updated_at` | ISO timestamps |
+| `requirements_confirmed` | `true` after the user confirmed the requirements, set with `state.py confirm`. Resume does not ask again |
 | `stages` | One entry per agent, see below |
 | `gates` | Result and retry count per quality gate |
 | `approval` | Human approval of the event plan |
@@ -52,7 +53,8 @@ duplicate by the artifact that repeats the vendor, a broken link by the
 artifact that cites it.
 
 `status` is `pending`, `pass` or `fail`. `retries` counts re-runs caused
-by this gate. At 3 the run stops and the failure is reported.
+by this gate and is changed with `scripts/state.py gate`. At 3 the run
+stops and the failure is reported.
 
 ### approval
 

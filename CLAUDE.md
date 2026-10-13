@@ -45,31 +45,62 @@ each group reads the artifacts of the previous ones.
 
 ## Execution rules
 
-1. Do not start planning until `requirements.md` is confirmed by the user.
-   Ask all missing questions in one batch, not one by one.
-2. Every artifact is checked with the `artifact-validator` skill
-   (`.claude/skills/artifact-validator/`) before the next group starts. A failed artifact is re-run, not skipped.
-3. The `validator` agent checks the quality gates below. On a failure the
-   coordinator finds the owning agent, re-runs only that agent and the
-   artifacts that depend on it, then validates again. Max 3 retries per
-   gate. After that dependent work stops and the failure is reported.
-4. `html-builder` runs only after the plan was approved by the user.
-   Approval is recorded by a script and verified by a hook, not by the
-   model's own judgement. If the user rejects, the feedback goes to the
-   affected agents and the plan is approved again.
-5. Every claim about venues, prices or vendors needs a source URL found via
-   web search or fetch. Weather data comes from the Open-Meteo MCP server (`.mcp.json`;
-   tools `geocoding` and `weather_forecast`).
-   Do not rely on model memory for facts.
-6. Internal names must not reach the user. A leak is any artifact file
-   name (`venue.md`, `budget.md`, ...), `workflow-state.json` or a
-   `runs/<run-id>/artifacts` path. Refer to artifacts in plain words
-   ("the venue shortlist"). `no-leak-guard` blocks `AskUserQuestion`
-   calls and writes of `event-plan.html` that contain such names.
-7. `approval-gate-guard` blocks writing `runs/<run-id>/event-plan.html`
-   unless the state says `approved` and the approved hash matches the
-   current plan. The coordinator cannot bypass it by editing the state
-   by hand, the hash is computed from the plan file.
+The coordinator is `.claude/commands/plan-event.md`. It follows these
+steps and the rules below.
+
+1. Create the run (`scripts/state.py init runs/<run-id>`), or resume an
+   existing one.
+2. Requirements: run `requirements-formalizer`. If it reports missing
+   fields, ask them in one batch, then run it again. Planning does not
+   start until the user confirmed the requirements.
+3. Groups A, B and C in order. Agents inside a group run in parallel,
+   groups run sequentially.
+4. After each group check every new artifact with the `artifact-validator`
+   skill (`.claude/skills/artifact-validator/`). A failed artifact is
+   re-run by its owner, not skipped, up to 3 attempts.
+5. Run `validator`. Map each failed gate to its owner and re-run only
+   the owners and the stages that became `stale` because of it, in group
+   order, then validate again. Max 3 retries per gate. If a gate still
+   fails, stop, mark the stage `failed` and report it. Nothing that
+   depends on it runs.
+6. Run `plan-builder`, ask the user to approve the plan, then
+   `html-builder`. Approval is recorded by a script and verified by a
+   hook, not by the model's own judgement. If the user rejects, the
+   feedback goes to the affected agents and the plan is approved again.
+
+Rules:
+
+- The coordinator writes no event content, it only delegates, validates
+  and tracks state.
+- Every claim about venues, prices or vendors needs a source URL found via
+  web search or fetch. Weather data comes from the Open-Meteo MCP server
+  (`.mcp.json`; tools `geocoding`, `weather_forecast`, `weather_archive`).
+  Do not rely on model memory for facts.
+- Internal names must not reach the user. A leak is any artifact file
+  name (`venue.md`, `budget.md`, ...), `workflow-state.json` or a
+  `runs/<run-id>/artifacts` path. Refer to artifacts in plain words
+  ("the venue shortlist"). `no-leak-guard` blocks `AskUserQuestion`
+  calls and writes of `event-plan.html` that contain such names.
+- `approval-gate-guard` blocks writing `runs/<run-id>/event-plan.html`
+  unless the state says `approved` and the approved hash matches the
+  current plan. The hash is computed from the plan file, so editing the
+  state by hand does not help.
+
+## Failure mapping
+
+| Failed gate | Owner (from the validator's finding) | Re-generated afterwards |
+|---|---|---|
+| G1 budget over limit | owner of the largest cost line, usually catering or venue | budget, checklist, validator |
+| G2 capacity | venue-planner | everything in groups B and C |
+| G3 dietary | catering-planner | budget, checklist |
+| G4 time window | program-planner | checklist, budget |
+| G5 rain fallback | program-planner | checklist |
+| G6 duplicates | the artifact that repeats the vendor | budget |
+| G7 sources | the artifact that cites the bad link | its dependents |
+
+Dependents are not listed by hand: when an artifact is rewritten its hash
+changes, the hook marks `done` stages that depend on it as `stale`, and
+the coordinator re-runs every `stale` stage.
 
 ## Quality gates
 

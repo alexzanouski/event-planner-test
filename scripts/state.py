@@ -5,6 +5,9 @@ Usage:
   state.py init <run-dir>                    create workflow-state.json
   state.py write <run-dir> <artifact-file>   record that an artifact was written
   state.py set <run-dir> <stage> <status>    set a stage status by hand
+  state.py confirm <run-dir>                 record that the user confirmed the requirements
+  state.py gate <run-dir> <G> <pass|fail|retry> [owner]
+                                             record a gate result, or count a retry
   state.py show <run-dir>                    print stage statuses
 
 The state file is runs/<run-id>/workflow-state.json, see docs/state.md.
@@ -104,19 +107,46 @@ def set_status(run_dir, stage, status):
     save(run_dir, state)
 
 
+def gate(run_dir, name, result, owner=None):
+    """`retry` counts one more re-run caused by the gate and prints the total."""
+    if result not in ("pass", "fail", "retry"):
+        sys.exit(f"unknown gate result: {result}")
+    state = load(run_dir)
+    if name not in state["gates"]:
+        sys.exit(f"unknown gate: {name}")
+    entry = state["gates"][name]
+    if result == "retry":
+        entry["retries"] += 1
+    else:
+        entry["status"] = result
+        entry["owner"] = owner if result == "fail" else None
+    save(run_dir, state)
+    print(f"{name}: {entry['status']}, retries={entry['retries']}")
+
+
+def confirm(run_dir):
+    state = load(run_dir)
+    state["requirements_confirmed"] = True
+    save(run_dir, state)
+
+
 def show(run_dir):
     state = load(run_dir)
     for name, info in state["stages"].items():
         print(f"{info['group']:>2} {name:<26} {info['status']:<8} attempts={info['attempts']}")
+    for name, info in state["gates"].items():
+        print(f"{name} {info['status']:<7} retries={info['retries']} owner={info['owner']}")
+    print(f"requirements confirmed: {state['requirements_confirmed']}")
     print(f"approval: {state['approval']['status']}")
 
 
 def main(argv):
-    commands = {"init": (init, 1), "write": (write, 2), "set": (set_status, 3), "show": (show, 1)}
+    commands = {"init": (init, 1, 1), "write": (write, 2, 2), "set": (set_status, 3, 3),
+                "gate": (gate, 3, 4), "confirm": (confirm, 1, 1), "show": (show, 1, 1)}
     if len(argv) < 2 or argv[1] not in commands:
         sys.exit(__doc__)
-    func, count = commands[argv[1]]
-    if len(argv) != count + 2:
+    func, low, high = commands[argv[1]]
+    if not low <= len(argv) - 2 <= high:
         sys.exit(__doc__)
     func(*argv[2:])
 

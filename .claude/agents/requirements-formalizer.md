@@ -71,10 +71,14 @@ Set `Status: final` only when all required fields are confirmed.
 
 ## Reply to the coordinator
 
-Reply with a short message:
+The first line is `STATUS: complete` or `STATUS: missing`.
 
-- `STATUS: complete` or `STATUS: missing`
-- if missing, the list of missing required fields, phrased as questions
-  the coordinator can ask in a single batch
+If missing, add one line per missing required field, in the form
 
-Do not write anything except `requirements.md`.
+```
+- <field>: <question> | options: <option 1> / <option 2> / <option 3>
+```
+
+`options` are the likely answers, two to four of them, so the coordinator
+can ask all missing questions in one batch. Leave `options` out only when
+the answer is free text, such as the city.

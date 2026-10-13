@@ -66,6 +66,15 @@ a run:
 python3 scripts/state.py show runs/<run-id>
 ```
 
+## Sample runs
+
+Complete runs are kept in `runs/`: the original request, all artifacts,
+the final HTML and `workflow-state.json`.
+
+| Run | Scenario | Notes |
+|---|---|---|
+| `2026-10-13-birthday-warsaw` | Indoor birthday for 20 in Warsaw, 2000 EUR, 3 vegetarians, photographer | Several gate retries, approved, HTML built |
+
 ## Repository layout
 
 | Path | Purpose |

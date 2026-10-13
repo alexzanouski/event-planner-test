@@ -38,8 +38,33 @@ Then:
 ```
 
 The command asks the missing questions in one batch, confirms the
-requirements, runs the agents and creates `runs/<run-id>/`. Resume and
-approval are described below once they land.
+requirements, runs the agents and creates `runs/<run-id>/`.
+
+### Approval
+
+When the plan passes all quality gates the coordinator shows it and asks
+for approval. Approving stores the hash of the plan in the run state
+(`scripts/approve.py`). The HTML guide can only be written while that hash
+matches the current plan. If you request changes, the plan is revised,
+checked again and submitted for approval again.
+
+The result is `runs/<run-id>/event-plan.html`.
+
+### Resume
+
+If a run was interrupted (closed terminal, crash, error), continue it with
+
+```
+/plan-event resume <run-id>
+```
+
+Finished stages are kept. Stages that were running are started again,
+stale ones are regenerated and gates are re-checked. Current progress of
+a run:
+
+```bash
+python3 scripts/state.py show runs/<run-id>
+```
 
 ## Repository layout
 

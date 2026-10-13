@@ -67,9 +67,12 @@ stops and the failure is reported.
 }
 ```
 
-`status` is `none`, `pending`, `approved` or `rejected`. Approval is only
-valid while `plan_hash` matches the current `event-plan.md`. Any edit to
-the plan invalidates it.
+`status` is `none`, `approved` or `rejected`. `scripts/approve.py` records
+the decision and refuses to approve while a gate has not passed.
+Approval is only valid while `plan_hash` matches the current
+`event-plan.md`. When the plan is rewritten the post-write hook resets the
+approval to `none`, so a revised plan always needs a new approval. A
+rejection keeps the user's `feedback` until the plan is rewritten.
 
 ## Resume
 

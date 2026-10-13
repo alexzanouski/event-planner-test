@@ -64,9 +64,11 @@ steps and the rules below.
    fails, stop, mark the stage `failed` and report it. Nothing that
    depends on it runs.
 6. Run `plan-builder`, ask the user to approve the plan, then
-   `html-builder`. Approval is recorded by a script and verified by a
-   hook, not by the model's own judgement. If the user rejects, the
-   feedback goes to the affected agents and the plan is approved again.
+   `html-builder`. Approval is recorded by `scripts/approve.py` and
+   verified by a hook, not by the model's own judgement. If the user
+   rejects, the feedback goes to `plan-builder` (presentation) or to the
+   owning agents (content), the stale stages are re-run, gates are
+   checked again and the new plan is submitted for approval.
 
 Rules:
 

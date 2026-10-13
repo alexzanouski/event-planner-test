@@ -91,9 +91,25 @@ agent it names and go back to step 4.
 
 ## 6. Approval and HTML
 
-Not wired yet. Stop here and report to the user that the plan is ready:
-give a short plain-language summary (dates, venue, total cost against the
-limit, number of timeline items). Do not run `html-builder`.
+1. If `approval.status` is already `approved` and the HTML stage is
+   `done`, skip to 6.5.
+2. Show the user the plan in plain words: date and time window, venue,
+   caterer, the timeline in a few lines, total cost against the limit.
+   Ask with `AskUserQuestion`: approve, or request changes.
+3. Approve: run `python3 scripts/approve.py <run> approve`. If it refuses
+   because a gate has not passed, go back to step 4.
+4. Request changes: ask what should change, then run
+   `python3 scripts/approve.py <run> reject "<feedback>"` and revise:
+   - wording, order or emphasis: run `plan-builder` with the feedback;
+   - different content (another venue, cheaper menu, new activity): run
+     the owning agent with the feedback, then re-run all `stale` stages in
+     group order, go through step 4 (gates) and step 5 again.
+   Then return to 6.2. The rewritten plan resets the approval, so the new
+   plan has to be approved again.
+5. After approval run the `html-builder` agent and wait for it. If a hook
+   blocked it, report the reason and stop. Otherwise tell the user the
+   guide is ready at `runs/<run-id>/event-plan.html` and summarise in
+   two lines what it contains.
 
 ## Output rules
 

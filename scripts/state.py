@@ -92,6 +92,10 @@ def write(run_dir, artifact_file):
             if state["stages"][name]["status"] == "done":
                 state["stages"][name]["status"] = "stale"
                 state["stages"][name]["updated_at"] = now()
+    # A rewritten plan is a different plan: the old approval no longer applies.
+    if stage == "plan-builder" and state["approval"]["status"] != "none":
+        state["approval"] = {"status": "none", "plan_hash": None,
+                             "approved_at": None, "feedback": None}
     save(run_dir, state)
     return stage
 

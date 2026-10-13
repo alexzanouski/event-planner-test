@@ -12,6 +12,19 @@ Invoked with a custom slash command: `/plan-event <request>`.
 - Node.js 22 or later (the Open-Meteo MCP server runs through `npx`)
 - Python 3 (state script and hooks, standard library only)
 
+## Components
+
+| Kind | Names |
+|---|---|
+| Coordinator | `/plan-event` |
+| Agents | `requirements-formalizer`, `venue-planner`, `weather`, `catering-planner`, `program-planner`, `services-planner`, `guest-checklist-planner`, `budget-aggregator`, `validator`, `plan-builder`, `html-builder` |
+| Skills | `artifact-validator`, `event-html-theme-builder` |
+| Hooks | `post-write-state`, `approval-gate-guard`, `no-leak-guard` |
+| MCP | `open-meteo` |
+
+Architecture, execution rules and quality gates are described in
+`CLAUDE.md`.
+
 ## MCP servers
 
 `.mcp.json` registers one server:
@@ -84,12 +97,14 @@ the final HTML and `workflow-state.json`.
 | `.claude/commands/` | Slash commands (coordinator) |
 | `.claude/hooks/` | PreToolUse / PostToolUse hook scripts |
 | `.claude/settings.json` | Hook registration |
-| `scripts/` | `state.py` (init, show, update run state), approval script later |
+| `scripts/` | `state.py` (run state), `approve.py` (approval) |
 | `docs/` | Artifact and state conventions |
 | `templates/` | Artifact and HTML templates |
 | `runs/` | Persisted sample runs: inputs, artifacts, state |
 
 ## Secrets
 
-No secrets are committed. See `.env.example` for the variables the workflow
-may use; copy it to `.env` locally (ignored by git).
+No secrets are committed. The only credential is the Anthropic account
+used by Claude Code: either `claude login` or `ANTHROPIC_API_KEY` exported
+in your shell. `.env.example` lists the variable, `.env` is ignored by git.
+The Open-Meteo MCP server needs no key.

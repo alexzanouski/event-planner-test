@@ -118,16 +118,33 @@ The `validator` agent runs all gates and names the owning agent for every
 failure. For G1, G6 and G7 the owner depends on the finding, for example
 the artifact with the largest cost line.
 
+## Skills and hooks
+
+| Component | Purpose |
+|---|---|
+| skill `artifact-validator` | structural and citation check of one artifact, used by the coordinator after every group |
+| skill `event-html-theme-builder` | rendering rules and the HTML template, used by `html-builder` |
+| hook `post-write-state` (PostToolUse) | updates `workflow-state.json` when an artifact is written, marks dependents `stale`, resets approval when the plan changes |
+| hook `approval-gate-guard` (PreToolUse) | blocks the final HTML until the current plan is approved |
+| hook `no-leak-guard` (PreToolUse) | blocks internal file names in the HTML and in `AskUserQuestion` |
+
+Hooks are registered in `.claude/settings.json`. The MCP server is
+registered in `.mcp.json`.
+
 ## State and runs
 
-Each run lives in `runs/<run-id>/`:
+Each run lives in `runs/<run-id>/`, the id is `<date>-<slug>`:
 
 - `input.md` the original request
 - `artifacts/` the markdown artifacts listed above
-- `workflow-state.json` stage statuses, retries, approval
+- `workflow-state.json` stage statuses, gate results and retries,
+  confirmation of the requirements, approval
+- `event-plan.html` the final guide, written only after approval
 
 State is updated automatically whenever an artifact is written. On resume
-the coordinator reads the state, skips completed stages and continues
-with the first stage that is pending or failed.
+(`/plan-event resume <run-id>`) the coordinator reads the state, skips
+`done` stages and re-runs `pending`, `failed`, `stale` and interrupted
+(`running`) stages.
 
-Artifact layout is described in `docs/artifacts.md`, state format in `docs/state.md`.
+Artifact layout is described in `docs/artifacts.md`, state format in
+`docs/state.md`.

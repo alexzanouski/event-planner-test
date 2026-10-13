@@ -37,8 +37,9 @@ On the first run Claude Code asks to approve the project MCP server.
 
 ## Run
 
-Start Claude Code in the repository root and approve the project MCP
-server and hooks on first start:
+The project pins the model to Sonnet in `.claude/settings.json`; the
+coordinator and all subagents use it. Start Claude Code in the repository
+root and approve the project MCP server and hooks on first start:
 
 ```bash
 claude

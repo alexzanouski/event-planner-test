@@ -41,7 +41,7 @@ each group reads the artifacts of the previous ones.
 | budget-aggregator | `budget.md` | requirements, venue, catering, program, services |
 | validator | `validation.md` | all artifacts |
 | plan-builder | `event-plan.md` | all validated artifacts |
-| html-builder | `event-plan.html` | approved `event-plan.md` |
+| html-builder | `event-plan.html` | approved `event-plan.md`, skill `event-html-theme-builder` |
 
 ## Execution rules
 

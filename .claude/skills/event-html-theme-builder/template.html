@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<style>
+  :root {
+    --bg: #fbf8f3; --card: #ffffff; --text: #2b2622; --muted: #7a6f66;
+    --accent: #b5532f; --line: #e8dfd4; --soft: #f4ece1;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917; --card: #26211e; --text: #f1ebe4; --muted: #a79b90;
+      --accent: #e0825c; --line: #3a322d; --soft: #2f2824;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 40px 16px 24px; max-width: 880px; margin: 0 auto; }
+  header h1 { margin: 0 0 4px; font-size: 2rem; color: var(--accent); }
+  header p { margin: 0; color: var(--muted); }
+  nav { max-width: 880px; margin: 0 auto; padding: 0 16px 8px;
+        display: flex; flex-wrap: wrap; gap: 8px; }
+  nav a { color: var(--accent); text-decoration: none; font-size: .9rem;
+          border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; }
+  main { max-width: 880px; margin: 0 auto; padding: 0 16px 48px; }
+  section { background: var(--card); border: 1px solid var(--line);
+            border-radius: 12px; padding: 20px; margin-top: 20px; }
+  h2 { margin: 0 0 12px; font-size: 1.25rem; }
+  table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line);
+           vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: .8rem;
+       text-transform: uppercase; letter-spacing: .04em; }
+  tr.fallback td { background: var(--soft); font-style: italic; }
+  ul { padding-left: 20px; margin: 8px 0; }
+  a { color: var(--accent); }
+  .scroll { overflow-x: auto; }
+  footer { text-align: center; color: var(--muted); font-size: .8rem; padding-bottom: 32px; }
+  @media print { nav { display: none; } section { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>{{TITLE}}</h1>
+  <p>{{SUBTITLE}}</p>
+</header>
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#timeline">Timeline</a>
+  <a href="#budget">Budget</a>
+  <a href="#checklist">Checklist</a>
+  <a href="#sources">Sources</a>
+</nav>
+<main>
+  <section id="overview"><h2>Overview</h2>{{OVERVIEW}}</section>
+  <section id="timeline"><h2>Timeline</h2><div class="scroll">{{TIMELINE}}</div></section>
+  <section id="budget"><h2>Budget</h2><div class="scroll">{{BUDGET}}</div></section>
+  <section id="checklist"><h2>Checklist</h2><div class="scroll">{{CHECKLIST}}</div></section>
+  <section id="sources"><h2>Sources</h2>{{SOURCES}}</section>
+</main>
+<footer>Event guide</footer>
+</body>
+</html>

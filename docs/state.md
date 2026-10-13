@@ -36,7 +36,7 @@ Keyed by agent name:
 it was written, so it must be regenerated.
 
 The post-write hook sets the stage to `done` when the written artifact has
-`Status: final` and to `running` otherwise. It stores the file `hash` and
+`Status: final` (or is the final HTML) and to `running` otherwise. It stores the file `hash` and
 counts `attempts`. If the hash of an existing artifact changes, every
 `done` stage that depends on it, directly or not, becomes `stale`.
 

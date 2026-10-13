@@ -78,7 +78,9 @@ def write(run_dir, artifact_file):
 
     info["hash"] = digest
     info["attempts"] += 1
-    info["status"] = "done" if "Status: final" in text else "running"
+    # HTML has no Status line, writing it is the end of that stage.
+    final = path.suffix == ".html" or "Status: final" in text
+    info["status"] = "done" if final else "running"
     info["updated_at"] = now()
 
     # Downstream work was built from the old content, mark it for a re-run.

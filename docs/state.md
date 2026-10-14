@@ -67,8 +67,11 @@ stops and the failure is reported.
 }
 ```
 
-`status` is `none`, `approved` or `rejected`. `scripts/approve.py` records
-the decision and refuses to approve while a gate has not passed.
+`status` is `none`, `approved` or `rejected`. Approval is written only by
+the `approval-recorder` hook from the user's answer to the question
+`Approve the event plan for run <run-id>?`, and only while all gates
+pass. The coordinator can record a rejection with feedback
+(`scripts/approve.py <run> reject "<feedback>"`), never an approval.
 Approval is only valid while `plan_hash` matches the current
 `event-plan.md`. When the plan is rewritten the post-write hook resets the
 approval to `none`, so a revised plan always needs a new approval. A

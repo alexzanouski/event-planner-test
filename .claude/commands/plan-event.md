@@ -95,10 +95,14 @@ agent it names and go back to step 4.
    `done`, skip to 6.5.
 2. Show the user the plan in plain words: date and time window, venue,
    caterer, the timeline in a few lines, total cost against the limit.
-   Ask with `AskUserQuestion`: approve, or request changes.
-3. Approve: run `python3 scripts/approve.py <run> approve`. If it refuses
-   because a gate has not passed, go back to step 4.
-4. Request changes: ask what should change, then run
+   Then ask with `AskUserQuestion`, one question, exactly
+   `Approve the event plan for run <run-id>?`, options `Approve` and
+   `Request changes`.
+3. The `approval-recorder` hook records the user's answer in the state.
+   You cannot approve yourself and must not try. If the hook reports that
+   gates have not passed, go back to step 4.
+4. Request changes (or any other answer): if the answer does not say what
+   to change, ask, then run
    `python3 scripts/approve.py <run> reject "<feedback>"` and revise:
    - wording, order or emphasis: run `plan-builder` with the feedback;
    - different content (another venue, cheaper menu, new activity): run

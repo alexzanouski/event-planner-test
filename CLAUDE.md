@@ -64,8 +64,9 @@ steps and the rules below.
    fails, stop, mark the stage `failed` and report it. Nothing that
    depends on it runs.
 6. Run `plan-builder`, ask the user to approve the plan, then
-   `html-builder`. Approval is recorded by `scripts/approve.py` and
-   verified by a hook, not by the model's own judgement. If the user
+   `html-builder`. Approval is recorded by the `approval-recorder` hook
+   from the user's own answer and verified by `approval-gate-guard`, not
+   by the model's own judgement. If the user
    rejects, the feedback goes to `plan-builder` (presentation) or to the
    owning agents (content), the stale stages are re-run, gates are
    checked again and the new plan is submitted for approval.
@@ -125,6 +126,7 @@ the artifact with the largest cost line.
 | skill `artifact-validator` | structural and citation check of one artifact, used by the coordinator after every group |
 | skill `event-html-theme-builder` | rendering rules and the HTML template, used by `html-builder` |
 | hook `post-write-state` (PostToolUse) | updates `workflow-state.json` when an artifact is written, marks dependents `stale`, resets approval when the plan changes |
+| hook `approval-recorder` (PostToolUse) | records approval or rejection from the user's answer to the approval question |
 | hook `approval-gate-guard` (PreToolUse) | blocks the final HTML until the current plan is approved |
 | hook `no-leak-guard` (PreToolUse) | blocks internal file names in the HTML and in `AskUserQuestion` |
 

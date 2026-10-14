@@ -19,7 +19,7 @@ Invoked with a custom slash command: `/plan-event <request>`.
 | Commands | `/plan-event` (planning), `/publish-site` (publishing) |
 | Agents | `requirements-formalizer`, `venue-planner`, `weather`, `catering-planner`, `program-planner`, `services-planner`, `guest-checklist-planner`, `budget-aggregator`, `validator`, `plan-builder`, `html-builder` |
 | Skills | `artifact-validator`, `event-html-theme-builder` |
-| Hooks | `post-write-state`, `approval-gate-guard`, `no-leak-guard` |
+| Hooks | `post-write-state`, `approval-recorder`, `approval-gate-guard`, `no-leak-guard` |
 | MCP | `open-meteo` |
 
 Architecture, execution rules and quality gates are described in
@@ -57,8 +57,8 @@ requirements, runs the agents and creates `runs/<run-id>/`.
 ### Approval
 
 When the plan passes all quality gates the coordinator shows it and asks
-for approval. Approving stores the hash of the plan in the run state
-(`scripts/approve.py`). The HTML guide can only be written while that hash
+for approval. Your answer is recorded by a hook, not by the model:
+approving stores the hash of the plan in the run state. The HTML guide can only be written while that hash
 matches the current plan. If you request changes, the plan is revised,
 checked again and submitted for approval again.
 

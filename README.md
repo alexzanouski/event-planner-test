@@ -84,7 +84,7 @@ python3 scripts/state.py show runs/<run-id>
 
 `/publish-site` builds a static site from all approved runs (an index page
 with the list of events and one page per event) and publishes it to
-Cloudflare Pages.
+Cloudflare as static assets with `wrangler`.
 
 ```
 /publish-site
@@ -92,9 +92,10 @@ Cloudflare Pages.
 
 It shows what will be published and asks for confirmation first, the
 pages become public. Access: `npx wrangler login`, or export
-`CLOUDFLARE_API_TOKEN` (permission Cloudflare Pages - Edit) and
-`CLOUDFLARE_ACCOUNT_ID`. The project is created on first publish, its name
-is `CLOUDFLARE_PAGES_PROJECT` (default `event-planner-guides`).
+`CLOUDFLARE_API_TOKEN` (permission Workers Scripts - Edit) and
+`CLOUDFLARE_ACCOUNT_ID`. The site name is `CLOUDFLARE_SITE_NAME` (default
+`event-planner-guides`), the first deploy creates it and the address is
+printed by wrangler.
 
 To look at the site without publishing:
 

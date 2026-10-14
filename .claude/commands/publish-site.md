@@ -1,5 +1,5 @@
 ---
-description: Build the static site of approved events and publish it to Cloudflare Pages
+description: Build the static site of approved events and publish it to Cloudflare as static assets
 argument-hint: (no arguments)
 ---
 
@@ -21,17 +21,28 @@ details.
 
 ## 3. Confirm
 
-The project name is `$CLOUDFLARE_PAGES_PROJECT`, or `event-planner-guides`
-if it is not set. Ask with `AskUserQuestion` whether to publish, naming
-the project and listing the events by title and date. Say that the pages
-will be publicly reachable. Continue only on a clear yes.
+The site name is `$CLOUDFLARE_SITE_NAME`, or `event-planner-guides` if it
+is not set. Ask with `AskUserQuestion` whether to publish, naming the
+site and listing the events by title and date. Say that the pages will be
+publicly reachable. Continue only on a clear yes.
 
 ## 4. Publish
 
-1. If the project does not exist (`npx wrangler pages project list`),
-   create it: `npx wrangler pages project create <project> --production-branch main`.
-2. Deploy: `npx wrangler pages deploy site --project-name <project> --branch main`.
-3. Report the address wrangler printed and the list of published events.
+Deploy the generated folder as static assets (Cloudflare Workers static
+assets, the current way to host static sites there; the first deploy
+creates the site):
+
+```
+npx wrangler deploy --assets site --name <site> --compatibility-date <today>
+```
+
+Do not use `wrangler pages project create` or `--force`: current wrangler
+delegates Pages commands to Workers and the project creation step fails
+for a site without a Worker script.
+
+Report the address wrangler printed and the list of published events. If
+the deploy fails, report the error and stop, do not retry with other
+flags.
 
 Do not edit anything inside `site/` by hand: it is generated and
 replaced on every build.

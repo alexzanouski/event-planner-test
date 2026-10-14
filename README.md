@@ -129,7 +129,7 @@ the final HTML and `workflow-state.json`.
 | `.claude/settings.json` | Hook registration |
 | `scripts/` | `state.py` (run state), `approve.py` (approval) |
 | `docs/` | Artifact and state conventions |
-| `templates/` | Artifact and HTML templates |
+| `templates/` | Artifact and workflow state templates (the HTML template lives in the `event-html-theme-builder` skill) |
 | `runs/` | Persisted sample runs: inputs, artifacts, state |
 
 ## Secrets

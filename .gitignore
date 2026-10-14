@@ -21,3 +21,4 @@ __pycache__/
 
 # Generated static site
 site/
+.wrangler/

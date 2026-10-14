@@ -86,8 +86,10 @@ Rules:
   calls and writes of `event-plan.html` that contain such names.
 - `approval-gate-guard` blocks writing `runs/<run-id>/event-plan.html`
   unless the state says `approved` and the approved hash matches the
-  current plan. The hash is computed from the plan file, so editing the
-  state by hand does not help.
+  current plan. It also blocks any direct write of `workflow-state.json`
+  and shell commands that would write either file, so the check cannot be
+  bypassed. Artifacts are written with Write/Edit only, which keeps the
+  state in sync through the post-write hook.
 
 ## Failure mapping
 
@@ -127,7 +129,7 @@ the artifact with the largest cost line.
 | skill `event-html-theme-builder` | rendering rules and the HTML template, used by `html-builder` |
 | hook `post-write-state` (PostToolUse) | updates `workflow-state.json` when an artifact is written, marks dependents `stale`, resets approval when the plan changes |
 | hook `approval-recorder` (PostToolUse) | records approval or rejection from the user's answer to the approval question |
-| hook `approval-gate-guard` (PreToolUse) | blocks the final HTML until the current plan is approved |
+| hook `approval-gate-guard` (PreToolUse) | blocks the final HTML until the current plan is approved, blocks manual writes of the state and shell writes of either file |
 | hook `no-leak-guard` (PreToolUse) | blocks internal file names in the HTML and in `AskUserQuestion` |
 
 Hooks are registered in `.claude/settings.json`. The MCP server is

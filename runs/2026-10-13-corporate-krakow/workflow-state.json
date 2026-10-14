@@ -1,0 +1,180 @@
+{
+  "run_id": "2026-10-13-corporate-krakow",
+  "created_at": "2026-10-13T12:46:40Z",
+  "updated_at": "2026-10-13T13:11:44Z",
+  "requirements_confirmed": true,
+  "stages": {
+    "requirements-formalizer": {
+      "group": "0",
+      "status": "done",
+      "artifact": "requirements.md",
+      "attempts": 1,
+      "hash": "3b74e525a99dbe976e862bfc9b512113cfd2f1f072623719fcf08c11b7c8081d",
+      "depends_on": [],
+      "updated_at": "2026-10-13T12:47:01Z"
+    },
+    "venue-planner": {
+      "group": "A",
+      "status": "done",
+      "artifact": "venue.md",
+      "attempts": 1,
+      "hash": "52b9c7e8e68c444b8435424b03f6b27220a41e818ef5738dbb094a62fcab36db",
+      "depends_on": [
+        "requirements-formalizer"
+      ],
+      "updated_at": "2026-10-13T12:52:05Z"
+    },
+    "weather": {
+      "group": "A",
+      "status": "done",
+      "artifact": "weather.md",
+      "attempts": 2,
+      "hash": "9f64098dbb7eb7af5175a9a849a8915900032c7842f1ea3d538554eedc1df799",
+      "depends_on": [
+        "requirements-formalizer"
+      ],
+      "updated_at": "2026-10-13T12:49:03Z"
+    },
+    "catering-planner": {
+      "group": "B",
+      "status": "done",
+      "artifact": "catering.md",
+      "attempts": 3,
+      "hash": "4017f59c85e591f8dba2a123c3c7605a46eafdccfc9394eed8a1453e32f0dc61",
+      "depends_on": [
+        "venue-planner",
+        "weather"
+      ],
+      "updated_at": "2026-10-13T12:58:41Z"
+    },
+    "program-planner": {
+      "group": "B",
+      "status": "done",
+      "artifact": "program.md",
+      "attempts": 2,
+      "hash": "8235477e07e06f205c7e42af0268529c245d5f80956dd78c60a2709e8ebfd6d1",
+      "depends_on": [
+        "venue-planner",
+        "weather"
+      ],
+      "updated_at": "2026-10-13T12:59:20Z"
+    },
+    "services-planner": {
+      "group": "B",
+      "status": "done",
+      "artifact": "services.md",
+      "attempts": 4,
+      "hash": "31ffe31994987795199922c44b6202569814c946bbf13d0a50e706fd73f445de",
+      "depends_on": [
+        "venue-planner",
+        "weather"
+      ],
+      "updated_at": "2026-10-13T13:01:11Z"
+    },
+    "guest-checklist-planner": {
+      "group": "C",
+      "status": "done",
+      "artifact": "checklist.md",
+      "attempts": 2,
+      "hash": "b5f0128491529673ff229c989d562195fd925f98869dea6dab86ea9fb6f11729",
+      "depends_on": [
+        "venue-planner",
+        "weather",
+        "catering-planner",
+        "program-planner"
+      ],
+      "updated_at": "2026-10-13T13:05:18Z"
+    },
+    "budget-aggregator": {
+      "group": "C",
+      "status": "done",
+      "artifact": "budget.md",
+      "attempts": 1,
+      "hash": "59933ce781f65c458f4298498fa9e4efbf9d57bc7c3b2e68fec2ca9feb3f3ba0",
+      "depends_on": [
+        "venue-planner",
+        "catering-planner",
+        "program-planner",
+        "services-planner"
+      ],
+      "updated_at": "2026-10-13T13:01:57Z"
+    },
+    "validator": {
+      "group": "V",
+      "status": "done",
+      "artifact": "validation.md",
+      "attempts": 1,
+      "hash": "6c91b5ba055cec7d956f6c1f02ca816ac57b134b46d9f0444f7789223b555926",
+      "depends_on": [
+        "guest-checklist-planner",
+        "budget-aggregator"
+      ],
+      "updated_at": "2026-10-13T13:07:21Z"
+    },
+    "plan-builder": {
+      "group": "P",
+      "status": "done",
+      "artifact": "event-plan.md",
+      "attempts": 1,
+      "hash": "770c60f5dc15335e505a1b391706efc831da4154290cf4ea66d8f3826a979f94",
+      "depends_on": [
+        "validator"
+      ],
+      "updated_at": "2026-10-13T13:09:30Z"
+    },
+    "html-builder": {
+      "group": "H",
+      "status": "done",
+      "artifact": "event-plan.html",
+      "attempts": 1,
+      "hash": "7fd885c9a03218cf46c82c6755ffba902797ea60d156699225b5c3058b44d51b",
+      "depends_on": [
+        "plan-builder"
+      ],
+      "updated_at": "2026-10-13T13:11:44Z"
+    }
+  },
+  "gates": {
+    "G1": {
+      "status": "pass",
+      "owner": null,
+      "retries": 0
+    },
+    "G2": {
+      "status": "pass",
+      "owner": null,
+      "retries": 0
+    },
+    "G3": {
+      "status": "pass",
+      "owner": null,
+      "retries": 0
+    },
+    "G4": {
+      "status": "pass",
+      "owner": null,
+      "retries": 0
+    },
+    "G5": {
+      "status": "pass",
+      "owner": null,
+      "retries": 0
+    },
+    "G6": {
+      "status": "pass",
+      "owner": null,
+      "retries": 0
+    },
+    "G7": {
+      "status": "pass",
+      "owner": null,
+      "retries": 0
+    }
+  },
+  "approval": {
+    "status": "approved",
+    "plan_hash": "770c60f5dc15335e505a1b391706efc831da4154290cf4ea66d8f3826a979f94",
+    "approved_at": "2026-10-13T13:10:13Z",
+    "feedback": null
+  }
+}

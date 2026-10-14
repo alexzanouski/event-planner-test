@@ -88,6 +88,8 @@ the final HTML and `workflow-state.json`.
 | Run | Scenario | Notes |
 |---|---|---|
 | `2026-10-13-birthday-warsaw` | Indoor birthday for 20 in Warsaw, 2000 EUR, 3 vegetarians, photographer | Several gate retries, approved, HTML built |
+| `2026-10-13-corporate-krakow` | Corporate party for 40 in Krakow, outdoor if possible, 2500 EUR, 5 vegetarians and 2 vegans, sound and decor | Outdoor event with rain fallback, climatology instead of a forecast, targeted re-runs |
+| `2026-10-13-graduation-warsaw` | Course graduation party for 120 near Warsaw, 150 EUR per person, fireworks, DJ, photographer | Large venue search, requirements Q&A, budget re-run |
 
 ## Repository layout
 

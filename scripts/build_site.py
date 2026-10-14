@@ -26,6 +26,11 @@ def overview_field(plan_text, label):
     return match.group(1).strip() if match else ""
 
 
+def first_match(pattern, text, suffix=""):
+    match = re.search(pattern, text)
+    return match.group(0) + suffix if match else ""
+
+
 def read_run(run_dir):
     """Return the metadata of an approved run, or None."""
     state_file = run_dir / "workflow-state.json"
@@ -46,8 +51,8 @@ def read_run(run_dir):
         "id": run_dir.name,
         "title": f"{kind} in {city}" if city else kind,
         "date": date.group(0) if date else "",
-        "guests": overview_field(text, "Guests").split(".")[0].split(",")[0],
-        "cost": overview_field(text, "Total cost"),
+        "guests": first_match(r"\d+", overview_field(text, "Guests"), " guests"),
+        "cost": first_match(r"\d[\d.,]*\s*EUR", overview_field(text, "Total cost")),
         "page": page,
     }
 

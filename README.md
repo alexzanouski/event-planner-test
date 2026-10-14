@@ -82,6 +82,9 @@ python3 scripts/state.py show runs/<run-id>
 
 ## Publishing
 
+Published guides of the sample runs:
+<https://event-planner-guides.n4xmg2wbt4.workers.dev/>
+
 `/publish-site` builds a static site from all approved runs (an index page
 with the list of events and one page per event) and publishes it to
 Cloudflare as static assets with `wrangler`.

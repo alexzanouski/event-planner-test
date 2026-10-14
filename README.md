@@ -16,7 +16,7 @@ Invoked with a custom slash command: `/plan-event <request>`.
 
 | Kind | Names |
 |---|---|
-| Coordinator | `/plan-event` |
+| Commands | `/plan-event` (planning), `/publish-site` (publishing) |
 | Agents | `requirements-formalizer`, `venue-planner`, `weather`, `catering-planner`, `program-planner`, `services-planner`, `guest-checklist-planner`, `budget-aggregator`, `validator`, `plan-builder`, `html-builder` |
 | Skills | `artifact-validator`, `event-html-theme-builder` |
 | Hooks | `post-write-state`, `approval-gate-guard`, `no-leak-guard` |
@@ -78,6 +78,29 @@ a run:
 
 ```bash
 python3 scripts/state.py show runs/<run-id>
+```
+
+## Publishing
+
+`/publish-site` builds a static site from all approved runs (an index page
+with the list of events and one page per event) and publishes it to
+Cloudflare Pages.
+
+```
+/publish-site
+```
+
+It shows what will be published and asks for confirmation first, the
+pages become public. Access: `npx wrangler login`, or export
+`CLOUDFLARE_API_TOKEN` (permission Cloudflare Pages - Edit) and
+`CLOUDFLARE_ACCOUNT_ID`. The project is created on first publish, its name
+is `CLOUDFLARE_PAGES_PROJECT` (default `event-planner-guides`).
+
+To look at the site without publishing:
+
+```bash
+python3 scripts/build_site.py
+python3 -m http.server --directory site 8000
 ```
 
 ## Sample runs
